@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repo_Pattern_MVC", "Repo_Pattern_MVC\Repo_Pattern_MVC.csproj", "{77B71E88-625E-4C02-9730-4DFBB53B2F77}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repo_Pattern_MVC_Web", "Repo_Pattern_MVC\Repo_Pattern_MVC_Web.csproj", "{77B71E88-625E-4C02-9730-4DFBB53B2F77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repo_pattern_MVC_Repository", "Repo_pattern_MVC_Repository\Repo_pattern_MVC_Repository.csproj", "{9D55A847-6597-432A-A090-6166DC2C72E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repo_Pattern_MVC_Model", "Repo_Pattern_MVC_Model\Repo_Pattern_MVC_Model.csproj", "{B9CE2D16-2E7F-45F5-9CCD-6F40395E5781}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{77B71E88-625E-4C02-9730-4DFBB53B2F77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77B71E88-625E-4C02-9730-4DFBB53B2F77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77B71E88-625E-4C02-9730-4DFBB53B2F77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D55A847-6597-432A-A090-6166DC2C72E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D55A847-6597-432A-A090-6166DC2C72E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D55A847-6597-432A-A090-6166DC2C72E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D55A847-6597-432A-A090-6166DC2C72E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9CE2D16-2E7F-45F5-9CCD-6F40395E5781}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9CE2D16-2E7F-45F5-9CCD-6F40395E5781}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9CE2D16-2E7F-45F5-9CCD-6F40395E5781}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9CE2D16-2E7F-45F5-9CCD-6F40395E5781}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
