@@ -50,6 +50,7 @@ namespace Repo_Pattern_MVC.Controllers
 			var result = new jsonMessage();
 			try
 			{
+				_Model.Password = CommonMethods.Encrypt(_Model.Password, true);
 				int Issave=_Home_Repository.Register(_Model);
 				if(Issave==1)
 				{
@@ -57,6 +58,48 @@ namespace Repo_Pattern_MVC.Controllers
 					result.Status = true;
 				}
 				
+			}
+			catch (Exception ex)
+			{
+				//ErrorLogers.ErrorLog(ex);
+				result.Message = ex.ToString();
+				result.Status = false;
+			}
+			return Json(result, JsonRequestBehavior.AllowGet);
+		}
+
+		[HttpPost]
+		public JsonResult Login(string Email,string Password, Boolean chkRememberMe)
+		{
+			var result = new jsonMessage();
+			try
+			{
+				Password = CommonMethods.Encrypt(Password, true);
+				var _List= _Home_Repository.GetRegisterData(Email,Password);
+				if (_List !=null)
+				{
+					SessionFacade.UserSession = _List;
+					if (chkRememberMe)
+					{
+						Dictionary<string, string> keyVal = new Dictionary<string, string>();
+						keyVal.Add(CookieKey.cookieUserName, Email);
+						keyVal.Add(CookieKey.cookiePassword, Password);
+
+						CookieHelper.CreateCookie(CookieKey.LoggedInUserId, keyVal, 30);
+					}
+					else
+					{
+						CookieHelper.DeleteCookie(CookieKey.LoggedInUserId);
+					}
+					result.Message = "Login success";
+					result.Status = true;
+				}
+				else
+				{
+					result.Message = "Please enter valid Email and Password";
+					result.Status = false;
+				}
+
 			}
 			catch (Exception ex)
 			{

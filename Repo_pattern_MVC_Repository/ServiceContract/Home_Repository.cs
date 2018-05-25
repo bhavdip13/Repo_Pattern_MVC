@@ -42,6 +42,11 @@ namespace Repo_pattern_MVC_Repository.ServiceContract
 			context.SaveChanges();
 			return 1;
 		}
+		public List<Register> GetRegisterData(string Email,string Password)
+		{
+			return context.Registers.Where(p => p.Email==Email && p.Password==Password).ToList();
+			
+		}
 		//------------------------------------
 		private bool disposed = false;
 		protected virtual void Dispose(bool disposing)

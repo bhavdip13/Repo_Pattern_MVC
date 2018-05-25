@@ -1,5 +1,6 @@
 ﻿@{
 	ViewBag.Title = "Home Page";
+
 }
 
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -5192,19 +5193,19 @@
 
 				<h1>Log in</h1>
 				<p>
-					<label for="username" class="uname"> Your email or username </label>
-					<input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com" />
+					<label class="username"> Your Email ID</label>
+					<input id="txtLoginEmail" type="text" placeholder="mymail@mail.com" class="form-control" />
 				</p>
 				<p>
-					<label for="password" class="youpasswd"> Your password </label>
-					<input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+					<label class="youpasswd"> Your password </label>
+					<input id="txtLoginPassword" type="password" placeholder="eg. X8df!90EO" class="form-control" />
 				</p>
 				<p class="keeplogin">
 					<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
 					<label for="loginkeeping">Keep me logged in</label>
 				</p>
 				<p class="login button">
-					<a href="http://cookingfoodsworld.blogspot.in/" target="_blank"></a>
+					<input type="button" value="Login" id="btnLogin" />
 				</p>
 				<p class="change_link">
 					Not a member yet ?
@@ -5248,7 +5249,7 @@
 				<p>
 					<label>Please confirm your password </label>
 					<input class="form-control required" id="txtConfirmPassword" type="password" placeholder="eg. X8df!90EO" />
-					
+
 					<span id="spanPassword" style="color:red"></span>
 
 				</p>
@@ -5265,13 +5266,11 @@
 		</div>
 	</div>
 </section>
-<input type="hidden" id="hdnId" value="0"/>
+<input type="hidden" id="hdnId" value="0" />
 <script type="text/javascript">
 	    $(document).ready(function () {
 
-        
-
-			var ddlCountry = $('#ddlCountry');
+				var ddlCountry = $('#ddlCountry');
         ddlCountry.append($("<option></option>").val('').html('Please Select Country'));
         $.ajax({
             url: '@Url.Action("GetCountry","Home")',
@@ -5349,6 +5348,9 @@
 						});
 					}
 				});
+				$("#txtConfirmPassword").blur(function () {
+					validatePassword();
+				});
 					$("#txtEmail").blur(function () {
 						if (!checkemail($("#txtEmail").val())) {
 							$("#spanEmail").text("please Enter Valid Email ID");
@@ -5364,15 +5366,32 @@
 
 													if (result.IS_registerd == false) {
 														$("#spanEmail").text("Email ID Already Registered.");
-
+														$("#txtEmail").addClass('red_border')
 													}
 													else {
 														$("#spanEmail").text("");
+														$("#txtEmail").removeClass('red_border')
+
 													}
 
                         }
-                    });	
-					});
+                    });
+				});
+
+				$("#btnLogin").click(function () {
+
+					$.ajax({
+							url: '@Url.Action("Login","Home")',
+							type: 'POST',
+						data: JSON.stringify({ "Email": $("#txtLoginEmail").val(), "Password": $("#txtLoginPassword").val(), "chkRememberMe": false }),
+						dataType: "json",
+						contentType: "application/json; charset=utf-8",
+						success: function (result) {
+							toastr.success(result.Message);
+							alert(result.Message);
+							}
+						});
+				});
 					$("#btnSave").click(function () {
 						var _Model={
 							"Id": $("#hdnId").val(),
@@ -5387,17 +5406,26 @@
             if (CheckRequiredFields()) {
 							if (!checkemail($("#txtEmail").val())) {
 								$("#spanEmail").text("please Enter Valid Email ID");
+								$("#txtEmail").addClass('red_border');
 								return false;
 							}
 							else {
 								$("#spanEmail").text("");
+								$("#txtEmail").removeClass('red_border');
 							}
 
 							if (!validatePassword()) {
-							  	return false;
-								}
-								
-							
+								$("#spanPassword").text("Enter Confirm Password Same as Password");
+								$("#txtConfirmPassword").addClass('red_border');
+								return false;
+							}
+
+							if ($("#spanEmail").text()=="Email ID Already Registered.") {
+								$("#txtEmail").addClass('red_border');
+								return false;
+							};
+
+
                 $.ajax({
                     url: '@Url.Action("Register", "Home")',
 									type: 'POST',
@@ -5405,18 +5433,15 @@
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         success: function (result) {
-                        
+													debugger;
                             if (result.Status == true) {
-                                toastr.success(result.Message);
+                             toastr.success(result.Message);
 															alert(result.Message);
 															clear();
                             }
                             else {
                                 toastr.error(result.Message);
-
-
-
-                            }
+	                            }
                         }
                     });
 
@@ -5432,23 +5457,23 @@
     });
 function clear() {
 
-	$('#register').find('input:text, input:email,input:password, select, textarea').val('');
+	$('#register').find('input:text, input:password, select, textarea').val('');
 	$('#register').find('input:radio, input:checkbox').prop('checked', false);
-	
+	$('#txtEmail').val('');
 
 }
 	function validatePassword() {
 		var password = $("#txtPassword").val();
 		var confirmPassword = $("#txtConfirmPassword").val();
 		if (password != confirmPassword) {
-			
 			$("#spanPassword").text("Enter Confirm Password Same as Password");
+			$("#txtConfirmPassword").addClass('red_border');
 			return false;
 		}
-		return true;
+		$("#txtConfirmPassword").removeClass('red_border');
 		$("#spanPassword").text("");
-		
-		
+		return true;
+
 	}
 
 </script>

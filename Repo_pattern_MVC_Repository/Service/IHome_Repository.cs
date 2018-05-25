@@ -14,5 +14,6 @@ namespace Repo_pattern_MVC_Repository.Service
 		List<Mst_State> GetState(int Country_Id);
 		bool CheckEmailAlredyregister(string Email);
 		int Register(Register Model);
+		List<Register> GetRegisterData(string Email, string Password);
 	}
 }

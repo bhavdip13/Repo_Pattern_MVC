@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repo_Pattern_MVC_Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,20 +12,20 @@ namespace Repo_Pattern_MVC.Utility
 
 		#region Public Properties
 
-		//public static SL_Cust_Web_MstGetLogin_Result UserSession
-		//{
-		//	get
-		//	{
-		//		SL_Cust_Web_MstGetLogin_Result userAuth
-		//						 = (SL_Cust_Web_MstGetLogin_Result)HttpContext.Current.Session[LoggedInUser];
-		//		return userAuth;
-		//	}
+		public static List<Register> UserSession
+		{
+			get
+			{
+				List <Register> userAuth
+								 = (List <Register>)HttpContext.Current.Session["LoggedInUser"];
+				return userAuth;
+			}
 
-		//	set
-		//	{
-		//		HttpContext.Current.Session[LoggedInUser] = value;
-		//	}
-		//}
+			set
+			{
+				HttpContext.Current.Session["LoggedInUser"] = value;
+			}
+		}
 
 		//public static string SearchQuery
 		//{
