@@ -12,8 +12,8 @@ namespace Repo_Pattern_MVC.Areas.Admin
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
-        {
+		public override void RegisterArea(AreaRegistrationContext context)
+		{
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
