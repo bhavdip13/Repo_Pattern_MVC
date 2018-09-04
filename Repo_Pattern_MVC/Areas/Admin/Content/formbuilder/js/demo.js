@@ -134,7 +134,9 @@ jQuery(function($) {
         formData: formData,
         templates: templates
       });
-      window.sessionStorage.setItem('formData', JSON.stringify(formData));
+			window.sessionStorage.setItem('formData', JSON.stringify(formData));
+			//save code here
+			debugger;
     },
     stickyControls: {
       enable: true
@@ -183,7 +185,8 @@ jQuery(function($) {
       getData: function() {
         console.log(fb.actions.getData());
       },
-      setData: function() {
+			setData: function () {
+				debugger;
         fb.actions.setData(setFormData);
       },
       addField: function() {
