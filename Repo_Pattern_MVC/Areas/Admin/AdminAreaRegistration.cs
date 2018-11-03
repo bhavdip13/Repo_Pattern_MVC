@@ -12,6 +12,7 @@ namespace Repo_Pattern_MVC.Areas.Admin
             }
         }
 
+
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
